@@ -2,19 +2,19 @@ import { useModalManager } from "../managers/modal";
 import { ModalContent } from "../components";
 
 export function ModalButton2() {
-  const { toggle, setTitle, setChildren } = useModalManager(
-    (manager) => manager.actions
+  const { toggleModal, setModalTitle, setModalChildren } = useModalManager(
+    (manager) => manager
   );
 
   function setupModal() {
-    setTitle("Title modal from button 2");
-    setChildren(
+    setModalTitle("Title modal from button 2");
+    setModalChildren(
       <ModalContent
         amount="$227.00"
         description="Sequi maiores hic cupiditate aliquid minus, eos inventore perferendis numquam quaerat, vel accusamus? Delectus, minima."
       />
     );
-    toggle();
+    toggleModal();
   }
 
   return (

@@ -14,22 +14,20 @@ export const useModalManager = create((set) => {
     state: {
       ...initialState,
     },
-    actions: {
-      toggle() {
-        setState(({ state }) => {
-          state.open = !state.open;
-        });
-      },
-      setTitle(title) {
-        setState(({ state }) => {
-          state.title = title;
-        });
-      },
-      setChildren(children) {
-        setState(({ state }) => {
-          state.children = children;
-        });
-      },
+    toggleModal() {
+      setState(({ state }) => {
+        state.open = !state.open;
+      });
+    },
+    setModalTitle(title) {
+      setState(({ state }) => {
+        state.title = title;
+      });
+    },
+    setModalChildren(children) {
+      setState(({ state }) => {
+        state.children = children;
+      });
     },
   };
 });
