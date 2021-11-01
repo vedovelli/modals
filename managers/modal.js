@@ -11,21 +11,19 @@ export const useModalManager = create((set) => {
   const setState = (fn) => set(produce(fn));
 
   return {
-    state: {
-      ...initialState,
-    },
+    ...initialState,
     toggleModal() {
-      setState(({ state }) => {
+      setState((state) => {
         state.open = !state.open;
       });
     },
     setModalTitle(title) {
-      setState(({ state }) => {
+      setState((state) => {
         state.title = title;
       });
     },
     setModalChildren(children) {
-      setState(({ state }) => {
+      setState((state) => {
         state.children = children;
       });
     },

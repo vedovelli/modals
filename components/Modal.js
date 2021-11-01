@@ -3,10 +3,9 @@ import { Fragment } from "react";
 import { useModalManager } from "../managers/modal";
 
 export function Modal() {
-  const {
-    state: { open, title, children },
-    toggleModal,
-  } = useModalManager((manager) => manager);
+  const { open, title, children, toggleModal } = useModalManager(
+    (manager) => manager
+  );
 
   return (
     <Transition.Root show={open} as={Fragment}>
