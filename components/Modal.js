@@ -1,16 +1,20 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { CheckIcon } from "@heroicons/react/outline";
-import { useSharedModal } from "../pages";
+import { useModalManager } from "../managers/modal";
 
 export function Modal({ children }) {
-  const [open, toggleModal] = useSharedModal();
+  const { state, actions } = useModalManager(({ state, actions }) => ({
+    state,
+    actions,
+  }));
+
   return (
-    <Transition.Root show={open} as={Fragment}>
+    <Transition.Root show={state.open} as={Fragment}>
       <Dialog
         as="div"
         className="fixed z-10 inset-0 overflow-y-auto"
-        onClose={() => toggleModal()}
+        onClose={() => actions.toggle()}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -58,6 +62,15 @@ export function Modal({ children }) {
                   </Dialog.Title>
                   <div className="mt-2">{children}</div>
                 </div>
+              </div>
+              <div className="mt-5 sm:mt-6">
+                <button
+                  type="button"
+                  className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+                  onClick={() => actions.toggle()}
+                >
+                  Go back to dashboard
+                </button>
               </div>
             </div>
           </Transition.Child>

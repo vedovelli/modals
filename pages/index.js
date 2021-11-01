@@ -4,17 +4,11 @@
  * 3. O hook retornará um método para substituir children
  */
 
-import { createReducerContext } from "react-use";
 import { ModalButton1, ModalButton2, Modal } from "../components";
-
-export const [useSharedModal, SharedModalProvider] = createReducerContext(
-  (state) => !state,
-  false
-);
 
 export default function Home() {
   return (
-    <SharedModalProvider>
+    <>
       <Modal>
         <p className="text-sm text-gray-500">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur
@@ -29,6 +23,6 @@ export default function Home() {
           <ModalButton2 />
         </div>
       </div>
-    </SharedModalProvider>
+    </>
   );
 }
