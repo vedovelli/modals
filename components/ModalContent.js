@@ -1,8 +1,8 @@
-import { useModalManager } from "../managers/modal";
 import { ReplacementContent } from ".";
+import { useModal } from "../hooks/modal";
 
 export function ModalContent({ amount, description }) {
-  const { setModalChildren } = useModalManager((manager) => manager);
+  const { setModalChildren } = useModal();
   return (
     <>
       <h1>{amount}</h1>
