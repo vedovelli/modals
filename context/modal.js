@@ -6,7 +6,7 @@ const defaultValues = {
   children: null,
   setModalTitle: (title) => {},
   setModalChildren: (children) => {},
-  toggleModal: () => {},
+  closeModal: () => {},
 };
 
 const ModalContext = React.createContext(defaultValues);
