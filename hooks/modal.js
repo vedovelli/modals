@@ -1,23 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { ModalContext } from "../context/modal";
 import { config } from "../components/Modal/config";
 
 export function useModal() {
-  const { open, title, children, closeModal, setModalTitle, setModalChildren } =
-    useContext(ModalContext);
-
-  return {
-    open,
-    title,
-    children,
-    closeModal,
-    setModalTitle,
-    setModalChildren,
-  };
-}
-
-export function useModalSetup() {
   const [open, setOpen] = useState(false);
   const [title, setModalTitle] = useState("");
   const [children, setModalChildren] = useState(null);
@@ -26,7 +11,7 @@ export function useModalSetup() {
   useEffect(() => {
     setOpen(false);
 
-    if (router.query.modal && !open) {
+    if (router.query.modal) {
       if (!config[router.query.modal]) {
         throw new Error("Modal config not found. Please check modal name");
       }
@@ -39,17 +24,15 @@ export function useModalSetup() {
     }
   }, [router.query.modal]);
 
-  const closeModal = () => {
-    setOpen(false);
-    router.push(router.pathname);
-  };
-
   return {
     open,
     title,
     children,
-    closeModal,
     setModalTitle,
     setModalChildren,
+    closeModal: () => {
+      setOpen(false);
+      router.push(router.pathname);
+    },
   };
 }
