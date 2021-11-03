@@ -1,28 +1,31 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { config } from "../components/Modal/config";
+import { config as modalConfig } from "../components/Modal/config";
 
 export function useModal() {
   const [open, setOpen] = useState(false);
   const [title, setModalTitle] = useState("");
   const [children, setModalChildren] = useState(null);
-  const router = useRouter();
+  const { query, push, pathname } = useRouter();
 
   useEffect(() => {
     setOpen(false);
 
-    if (router.query.modal) {
-      if (!config[router.query.modal]) {
+    if (query.modal) {
+      const { modal } = query;
+      const config = modalConfig[modal];
+
+      if (!config) {
         throw new Error("Modal config not found. Please check modal name");
       }
 
-      const { title, children } = config[router.query.modal];
+      const { title, children } = config;
 
       setModalTitle(title);
       setModalChildren(children);
       setOpen(true);
     }
-  }, [router.query.modal]);
+  }, [query.modal]);
 
   return {
     open,
@@ -32,7 +35,7 @@ export function useModal() {
     setModalChildren,
     closeModal: () => {
       setOpen(false);
-      router.push(router.pathname);
+      push(pathname);
     },
   };
 }
